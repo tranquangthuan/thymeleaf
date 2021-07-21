@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Select 1</title>
+</head>
+<body>
+	<h1>Select 1 page</h1>
+
+	<form th:action="@{/submit}" th:object="${personForm}" method="post">
+		<input type="text" th:value="${test}">
+		<table>
+			<tr>
+				<td>Input your full name</td>
+				<td><input type="text" th:field="*{fullName}">
+			</tr>
+			<tr>
+				<td>Input your gender</td>
+				<td><input type="checkbox" th:field="*{male}">
+			</tr>
+			<tr>
+				<td>Your skills</td>
+				<td><input type="checkbox" th:field="*{skills}" name="skills"
+					th:each="skill : ${allSkills}" th:text="${skill}"
+					th:value="${skill}"> <!-- aaaaa --> <!-- <th:block th:each="skill : ${allSkills}">
+						<input type="checkbox" th:field="*{skills}" name="skills"
+							th:value="${skill}">
+						<span th:text="${skill}"></span>
+					</th:block> -->
+			</tr>
+
+			<tr>
+				<td>Gender</td>
+				<td><th:block th:each="gen : ${allGenders}">
+						<input type="radio" th:field="*{gender}" name="gen"
+							th:value="${gen}">
+						<label th:for="${#ids.prev('gender')}" th:text="${gen}">Gender
+							Label</label>
+					</th:block>
+			</tr>
+			<tr>
+				<td>Please select country</td>
+				<td><select th:field="*{countryId}">
+						<option value="">----</option>
+						<option th:each="country : ${countries}"
+							th:value="${country.id}" th:text="${country.countryName}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Submit"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

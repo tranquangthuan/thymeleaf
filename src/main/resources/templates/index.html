@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text=${variable1}>This text will be replace aaa aaaa</h1>
+	<h1 th:utext=${variable1}>This text will be replace aaa aaaa</h1>
+	<h1 th:text=${variable2}>This text will be replace aaa aaaa</h1>
+	Inline expression<p>Hello, [[${variable2}]]!</p>
+	<table>
+		<tr>
+			<th>No</th>
+			<th>Name</th>
+		</tr>
+		<tr th:each="flower, iter : ${flowers}">
+			<td th:text="${iter.count }"></td>
+			<td th:text="${flower}"></td>
+		</tr>
+	</table>
+
+	<h2>Define variable in ThymeLeaf</h2>
+	<div th:with="flower0 = ${flowers[0]}">
+		Value of flower0 = <span th:text="${flower0}"></span>
+	</div>
+	Value of flower0 outer div
+	<span th:text="${flower0}"></span>
+	<div th:with="flower1 = ${flowers[1]}, flower2 = ${flowers[2]}">
+		<span>Flower1 = </span><span th:text="${flower1}"></span><br /> <span>Flower2
+			= </span><span th:text="${flower2}"></span>
+	</div>
+	<br />
+	<h2>Escape and UnEscape</h2>
+	Escape
+	<p>Welcome to our &lt;b&gt;fantastic&lt;/b&gt; grocery store!</p>
+	UnEscape
+	<p>
+		Welcome to our <b>fantastic</b> grocery store!
+	</p>
+	<b>th:text</b>
+	<p th:text="${welcomeMsg}"></p>
+	<b>th:utext</b>
+	<p th:utext="${welcomeMsg}"></p>
+	<h2>Elvis in ThymeLeaf</h2>
+	<div>
+		<p th:text="${test} ? ${variable1} : ${variable2}">Test</p>
+		<p th:text="${test111} ? ${variable1} : ${variable2}">â</p>
+
+	</div>
+
+	<h2>ThymeLeaf Loop</h2>
+	<ul>
+		<th:block th:each="item : ${products}">
+			<li><span th:text="${item.id}"></span> <span
+				th:text="${item.name}"></span> <span th:text="${item.description}"></span>
+			</li>
+		</th:block>
+	</ul>
+
+	<h2>Predefined Object In ThymeLeaf</h2>
+	<span th:text="${#locale.country}"></span>
+	<span th:text="${#locale.country}"></span>
+	<span th:text="${#locale.language}"></span>
+
+	<h3>#request.contextPath</h3>
+	<span th:utext="${#request.contextPath}"></span>
+
+	<h3>#request.requestURI</h3>
+	<span th:utext="${#request.requestURI}"></span>
+
+	<h3>#request.requestURL</h3>
+	<span th:utext="${#request.requestURL}"></span>
+
+	<input type="text" name="userName" value="James Carrot"
+		th:value="${name}" maxlength="5" />
+
+	<br />
+	<a href="/order/details">view1</a>
+	<br />
+	<a th:href="@{order/details(orderId=${id},type=${type})}">view2</a>
+	<br />
+	<a
+		th:href="@{order/details/{orderId}/{type}(orderId=${id},type=${type})}">view3</a>
+
+	<br />
+	<p>
+		Now you are looking at a <span th:text="'working web application'"></span>.
+	</p>
+
+	<p>
+		The year is <span th:text="2013">1492</span>.
+	</p>
+	<p>
+		In two years, it will be <span th:text="2013 + 2">1494</span>.
+	</p>
+
+	<div th:class="'content'">..1.</div>
+
+</body>
+</html>
