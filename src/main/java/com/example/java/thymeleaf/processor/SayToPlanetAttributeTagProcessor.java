@@ -19,6 +19,7 @@ public class SayToPlanetAttributeTagProcessor extends AbstractAttributeTagProces
 
 	private static final String ATTR_NAME = "saytoplanet";
 	private static final int PRECEDENCE = 10000;
+	private static final String SAYTO_PLANET_MESSAGE = "msg.helloplanet";
 
 	public SayToPlanetAttributeTagProcessor(String dialectPrefix) {
 		super(TemplateMode.HTML, dialectPrefix, null, false, ATTR_NAME, true, PRECEDENCE, true);
@@ -34,6 +35,15 @@ public class SayToPlanetAttributeTagProcessor extends AbstractAttributeTagProces
 		final String planet = (String) expression.execute(context);
 		log.info(attributeName);
 
-		structureHandler.setBody("Hello, planet, " + HtmlEscape.escapeHtml5(planet) + " !", false);
+		// structureHandler.setBody("Hello, planet, " + HtmlEscape.escapeHtml5(planet) +
+		// " !", false);
+		final String i18nMessage = context.getMessage(SayToPlanetAttributeTagProcessor.class, SAYTO_PLANET_MESSAGE,
+				new Object[] { planet }, true);
+
+		/*
+		 * Set the computed message as the body of the tag, HTML-escaped and
+		 * non-processable (hence the 'false' argument)
+		 */
+		structureHandler.setBody(HtmlEscape.escapeHtml5(i18nMessage), false);
 	}
 }
