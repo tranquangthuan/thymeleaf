@@ -42,8 +42,8 @@
 				<td>Please select country</td>
 				<td><select th:field="*{countryId}">
 						<option value="">----</option>
-						<option th:each="country : ${countries}"
-							th:value="${country.id}" th:text="${country.countryName}"></option>
+						<option th:each="country : ${countries}" th:value="${country.id}"
+							th:text="${country.countryName}"></option>
 				</select></td>
 			</tr>
 			<tr>
@@ -52,5 +52,9 @@
 			</tr>
 		</table>
 	</form>
+
+	<button type="button"
+		class="btn btn-default_danger_info_primary_success_warning btn-lg_sm_xs"
+		disabled>buttonLabel</button>
 </body>
 </html>

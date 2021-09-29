@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:hello="http://hello">
+<head>
+<meta charset="ISO-8859-1">
+<title>Custom</title>
+</head>
+<body>
+	<p hello:sayto="world aaaaa">Say To Taglib</p>
+	<ul>
+		<li th:each="planet : ${planets}" hello:saytoplanet="${planet}">Hello
+			Planet!</li>
+	</ul>
+</body>
+</html>

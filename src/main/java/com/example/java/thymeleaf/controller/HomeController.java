@@ -65,7 +65,6 @@ public class HomeController {
 		model.addAttribute("allSkills", Arrays.asList("Java", ".Net", "GoLang", "C++"));
 		model.addAttribute("allGenders", Arrays.asList("Male", "Female", "Other"));
 
-
 		return "select1";
 	}
 
@@ -76,5 +75,16 @@ public class HomeController {
 		model.addAttribute("countryMap", countryRepository.getMapsCoutries());
 
 		return "select2";
+	}
+
+	@GetMapping(value = { "/custom" })
+	public String custom(Model model) {
+		return "custom";
+	}
+
+	@ModelAttribute("planets")
+	public List<String> populatePlanets() {
+		return Arrays
+				.asList(new String[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" });
 	}
 }
