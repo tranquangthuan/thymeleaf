@@ -6,6 +6,7 @@ import java.util.Set;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 
+import com.example.java.thymeleaf.processor.PagingElementTagProcessor;
 import com.example.java.thymeleaf.processor.SayToAttributeTagProcessor;
 import com.example.java.thymeleaf.processor.SayToPlanetAttributeTagProcessor;
 
@@ -21,6 +22,7 @@ public class HelloDialect extends AbstractProcessorDialect {
 		final Set<IProcessor> processors = new HashSet<IProcessor>();
 		processors.add(new SayToAttributeTagProcessor(dialectPrefix));
 		processors.add(new SayToPlanetAttributeTagProcessor(dialectPrefix));
+		processors.add(new PagingElementTagProcessor(dialectPrefix));
 		return processors;
 	}
 

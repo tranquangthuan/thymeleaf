@@ -1,5 +1,6 @@
 package com.example.java.thymeleaf.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,12 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.java.thymeleaf.model.PersonForm;
 import com.example.java.thymeleaf.model.Product;
 import com.example.java.thymeleaf.repository.CountryRepository;
+import com.example.java.thymeleaf.utils.UtilString;
+
+import lombok.extern.log4j.Log4j2;
 
 @Controller
+@Log4j2
 public class HomeController {
 
 	@Autowired
@@ -78,7 +84,12 @@ public class HomeController {
 	}
 
 	@GetMapping(value = { "/custom" })
-	public String custom(Model model) {
+	public String custom(Model model, @RequestParam(required = false, defaultValue = "1") String page) {
+		int rowPerPage = 5;
+		model.addAttribute("rows", rowPerPage);
+		model.addAttribute("page", page);
+		model.addAttribute("products", dumyProducts(UtilString.parseInt(page, 1), rowPerPage));
+		model.addAttribute("totalCount", 100);
 		return "custom";
 	}
 
@@ -86,5 +97,18 @@ public class HomeController {
 	public List<String> populatePlanets() {
 		return Arrays
 				.asList(new String[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" });
+	}
+
+	public List<Product> dumyProducts(int page, int rowPerPage) {
+		List<Product> products = new ArrayList<Product>();
+		Product p;
+		int startIndex = ((page - 1) * rowPerPage) + 1;
+		int endIndex = startIndex + rowPerPage;
+		for (int i = startIndex; i < endIndex; i++) {
+			p = new Product("Product " + i, i, "Product description " + i);
+			products.add(p);
+		}
+
+		return products;
 	}
 }

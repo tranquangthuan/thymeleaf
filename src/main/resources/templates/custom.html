@@ -12,5 +12,19 @@
 		<li th:each="planet : ${planets}" hello:saytoplanet="${planet}">Hello
 			Planet!</li>
 	</ul>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Description</th>
+		</tr>
+		<tr th:each="p : ${products}">
+			<td th:utext="${p.id}"></td>
+			<td th:utext="${p.name}"></td>
+			<td th:utext="${p.description}">}</td>
+		</tr>
+	</table>
+	<hello:paging th:attr="page=${page}, rows=${rows}, total=${totalCount}" />
+
 </body>
 </html>

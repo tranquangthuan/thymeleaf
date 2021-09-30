@@ -10,9 +10,6 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 import com.example.java.thymeleaf.dialect.HelloDialect;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -28,8 +25,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		templateResolver.setCharacterEncoding("UTF-8");
-		// TODO: Template cache is true by default. Set to false if you want
-		// templates to be automatically updated when modified.
 		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
